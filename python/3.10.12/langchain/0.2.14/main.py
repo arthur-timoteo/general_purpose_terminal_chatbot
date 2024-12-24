@@ -2,43 +2,47 @@ import os
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from dotenv import load_dotenv
+from rich import print
 
-# Carregar variáveis de ambiente
+# Load environment variables
 load_dotenv()
 
-# Inicializar o modelo de linguagem
+# Start the large language model
 chat = ChatOpenAI(
     temperature=0.7,  # Controle de criatividade (0 = mais objetivo, 1 = mais criativo)
     openai_api_key=os.getenv("OPENAI_API_KEY"),
     model="gpt-3.5-turbo"
 )
 
-# Mensagens do contexto do chatbot
+# Chatbot scope
 def main():
-    print("Chatbot: Olá! Eu sou seu assistente. Pergunte-me qualquer coisa. Digite 'sair' para encerrar.\n")
+    print("[bold #FF8700]Chatbot:[/bold #FF8700] Olá! Eu sou seu assistente. Pergunte-me qualquer coisa. Digite 'sair' para encerrar.\n")
 
-    # Lista para armazenar o histórico de mensagens
+    # Creates variable to store message history
     messages = [SystemMessage(content="Você é um assistente útil e amigável.")]
 
     while True:
-        user_input = input("Você: ").strip()
+        print("[bold blue]Você:[/bold blue] ", end=" ")
+        user_input = input().strip()
+
         if user_input.lower() in ["sair", "exit", "quit"]:
-            print("Chatbot: Até logo!")
+            print("[bold #FF8700]Chatbot:[/bold #FF8700] Até logo!")
             break
 
-        # Adiciona a mensagem do usuário ao histórico
+        # Adds the user's message to the message history
         messages.append(HumanMessage(content=user_input))
 
-        # Gera a resposta do chatbot
+        # Generates the chatbot response
         try:
             response = chat.invoke(messages)
             chatbot_reply = response.content
-            print(f"Chatbot: {chatbot_reply}")
+            print(f"[bold #FF8700]Chatbot:[/bold #FF8700] {chatbot_reply}")
 
-            # Adiciona a resposta do AI ao histórico
+            # Adds AI response to message history
             messages.append(AIMessage(content=chatbot_reply))
         except Exception as e:
-            print(f"Erro: {e}")
+            print(f"[bold red]Erro:[/bold red] {e}")
 
+# Sets script initializer method
 if __name__ == "__main__":
     main()
