@@ -14,7 +14,7 @@ A general-purpose chatbot to be used by the computer terminal
 - python
     - 3.10.12
         - langchain
-            - 0.2.14
+            - [0.2.14](https://github.com/arthur-timoteo/general_purpose_terminal_chatbot/tree/feature-python_31012-langchain_0214/python/3.10.12/langchain/0.2.14)
 
 ## License
 
