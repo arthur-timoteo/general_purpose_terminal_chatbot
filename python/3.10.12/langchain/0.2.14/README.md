@@ -5,6 +5,7 @@
 - Git | 2.43.0
 - Python | 3.12.5
 - Pip | 24.2
+- langchain | 0.2.14
 
 ## How to run
 
